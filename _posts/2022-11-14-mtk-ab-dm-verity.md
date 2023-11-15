@@ -12,8 +12,6 @@ author: etoilexx
 paginate: false
 ---
 
-# MTK AB方案的dm-verity机制详解 - 售后开机异常问题分析
-
 ## 一、问题背景
 
 ![dm-verity corruption](https://cdn.jsdelivr.net/gh/jonewan/MD_PNG@master/dm-verity_corruption.png)

@@ -9,6 +9,7 @@ optimized_image: https://res.cloudinary.com/dm7h7e8xj/image/upload/c_scale,w_380
 category: Andorid System
 tags:
   - Android System
+  - Andorid屏幕录制实践
 author: etoile_xx
 ---
 
