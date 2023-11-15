@@ -12,12 +12,6 @@ show_hero: true
 menu:
   - title: Home
     url: /
-  - title: About
-    url: /about
-  - title: Contact
-    url: /contact
-  - title: Feed
-    url: /feed.xml
 email: etoile.jone@gmail.com
 # See: https://disqus.com/
 disqus_username: disqus_username
