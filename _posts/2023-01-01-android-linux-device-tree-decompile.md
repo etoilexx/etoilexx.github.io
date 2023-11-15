@@ -1,5 +1,5 @@
 ---
-date: 2022-07-07 08:00:00
+date: 2023-01-01 08:00:00
 layout: post
 title: Android设备树编译与反编译
 subtitle: Android设备树编译与反编译
@@ -33,56 +33,56 @@ paginate: false
 Usage: dtc [options] <input file>
 
 Options: -[qI:O:o:V:d:R:S:p:a:fb:i:H:sW:E:@Ahv]
-  -q, --quiet                
+  -q, --quiet
         Quiet: -q suppress warnings, -qq errors, -qqq all
-  -I, --in-format <arg>      
+  -I, --in-format <arg>
         Input formats are:
                 dts - device tree source text
                 dtb - device tree blob
                 fs  - /proc/device-tree style directory
-  -o, --out <arg>            
+  -o, --out <arg>
         Output file
-  -O, --out-format <arg>     
+  -O, --out-format <arg>
         Output formats are:
                 dts - device tree source text
                 dtb - device tree blob
                 asm - assembler source
-  -V, --out-version <arg>    
+  -V, --out-version <arg>
         Blob version to produce, defaults to 17 (for dtb and asm output)
-  -d, --out-dependency <arg> 
+  -d, --out-dependency <arg>
         Output dependency file
-  -R, --reserve <arg>        
+  -R, --reserve <arg>
         Make space for <number> reserve map entries (for dtb and asm output)
-  -S, --space <arg>          
+  -S, --space <arg>
         Make the blob at least <bytes> long (extra space)
-  -p, --pad <arg>            
+  -p, --pad <arg>
         Add padding to the blob of <bytes> long (extra space)
-  -a, --align <arg>          
+  -a, --align <arg>
         Make the blob align to the <bytes> (extra space)
-  -b, --boot-cpu <arg>       
+  -b, --boot-cpu <arg>
         Set the physical boot cpu
-  -f, --force                
+  -f, --force
         Try to produce output even if the input tree has errors
-  -i, --include <arg>        
+  -i, --include <arg>
         Add a path to search for include files
-  -s, --sort                 
+  -s, --sort
         Sort nodes and properties before outputting (useful for comparing trees)
-  -H, --phandle <arg>        
+  -H, --phandle <arg>
         Valid phandle formats are:
                 legacy - "linux,phandle" properties only
                 epapr  - "phandle" properties only
                 both   - Both "linux,phandle" and "phandle" properties
-  -W, --warning <arg>        
+  -W, --warning <arg>
         Enable/disable warnings (prefix with "no-")
-  -E, --error <arg>          
+  -E, --error <arg>
         Enable/disable errors (prefix with "no-")
-  -@, --symbols              
+  -@, --symbols
         Enable generation of symbols
-  -A, --auto-alias           
+  -A, --auto-alias
         Enable auto-alias of labels
-  -h, --help                 
+  -h, --help
         Print this help and exit
-  -v, --version              
+  -v, --version
         Print version and exit
 ```
 
@@ -111,7 +111,7 @@ drwxr-xr-x 3 root root      0 2022-06-27 17:27 devicetree
 其中`fdt`是设备树编译后的源文件（dtb二进制文件），而`devicetree`目录则包含整个设备树的结构信息，目录的根节点对应base目录, 每一个节点对应一个目录, 每一个属性对应一个文件：
 
 ```
-console:/sys/firmware # ls -lR devicetree/                                     
+console:/sys/firmware # ls -lR devicetree/
 devicetree/:
 total 0
 drwxr-xr-x 536 root root 0 2022-06-27 17:27 base
@@ -139,9 +139,9 @@ adb pull /sys/firmware/fdt
 dtc -I dtb -O dts fdt -o <device_name>.dts
 ```
 
-## SSP与W2设备树导出与解析
+## 设备树导出与解析实战
 
-* W2 MT8788方案设备树反编译
+* MTK MT8788方案设备树反编译
 
 ```
 /dts-v1/;
@@ -154,14 +154,14 @@ dtc -I dtb -O dts fdt -o <device_name>.dts
 	#size-cells = <0x2>;
 
     ......
-    
+
 	chosen { // 传递给Kernel启动时的参数
 	    ......
 		bootargs = "console=tty0 console=ttyS0,921600n1 vmalloc=400M slub_debug=OFZPU swiotlb=noforce page_owner=on cgroup.memory=nosocket,nokmem androidboot.hardware=mt6771 firmware_class.path=/vendor/firmware loop.max_part=7 has_battery_removed=0 androidboot.boot_devices=bootdevice,11230000.mmc root=/dev/ram androidboot.vbmeta.device=PARTUUID=8c68cd2a-ccc9-4c5d-8b57-34ae9b2dd481 androidboot.vbmeta.avb_version=1.1 androidboot.vbmeta.device_state=unlocked androidboot.veritymode=disabled androidboot.veritymode.managed=yes androidboot.slot_suffix=_a androidboot.slot=a androidboot.verifiedbootstate=orange bootopt=64S3,32N2,64N2 buildvariant=userdebug ddr_name= ddr_speed=0 androidboot.atm=disabled androidboot.force_normal_boot=1 androidboot.meta_log_disable=0 printk.disable_uart=0 bootprof.pl_t=1469 bootprof.lk_t=8993 bootprof.logo_t=1775 androidboot.serialno=YLH2144100004 androidboot.bootreason=rtc gpt=1 usb2jtag_mode=0 mrdump_ddrsv=yes mrdump_cb=0x11e000,0x2000 mrdump.lk=MRDUMP08 androidboot.dtb_idx=0 androidboot.dtbo_idx=0";
         ......
-    }; 
+    };
     ......
-    
+
 	cpus { // cpu每个核心的信息描述
 		#address-cells = <0x1>;
 		#size-cells = <0x0>;
@@ -195,7 +195,7 @@ dtc -I dtb -O dts fdt -o <device_name>.dts
 		mediatek,use-open-drain;
         ......
     };
-	
+
 	memory { // 内存信息
 		items_reserved_mem = <0xa07e 0x0 0x2000 0x0>;
 		tee_reserved_mem = <0xe0bf 0x0 0x400 0x0>;
@@ -208,7 +208,7 @@ dtc -I dtb -O dts fdt -o <device_name>.dts
 };
 ```
 
-* SSP Allwinner A133方案设备树反编译
+* Allwinner A133方案设备树反编译
 
 ```
 ......
@@ -255,7 +255,7 @@ dtc -I dtb -O dts fdt -o <device_name>.dts
         device_type = "soc";
         linux,phandle = <0x0000012b>;
         phandle = <0x0000012b>;
-        ......    
+        ......
         s_twi@0x07081400 {
             #address-cells = <0x00000001>;
             #size-cells = <0x00000000>;
@@ -298,4 +298,4 @@ dtc -I dtb -O dts fdt -o <device_name>.dts
         ......
     };
 };
-151007
+```
