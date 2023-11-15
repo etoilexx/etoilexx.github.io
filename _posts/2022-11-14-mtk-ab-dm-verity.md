@@ -4,8 +4,8 @@ layout: post
 title: MTK AB方案的dm-verity机制详解 - 售后开机异常问题分析
 subtitle: MTK AB方案的dm-verity机制详解 - 售后开机异常问题分析
 description:
-image: /assets/img/markdown_img/dm-verity.png
-optimized_image: /assets/img/markdown_img/dm-verity.png
+image: /assets/img/markdown_img/dm-verity.jpg
+optimized_image: /assets/img/markdown_img/dm-verity.jpg
 category: Android System
 tags: DM-Verity
 author: etoilexx
